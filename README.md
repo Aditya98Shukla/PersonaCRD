@@ -178,3 +178,42 @@ controlplane PersonaCRD on  main [⇡] via 🐹 v1.19 ➜  make manifests
 controlplane PersonaCRD on  main [?] via 🐹 v1.19 ➜  ls config/crd/bases
 comp.genesis.xyz.com_personas.yaml
 ```
+
+## Apply The CRDs and Create a Custom Resource.
+- Apply the CRD as shown below.
+```
+controlplane PersonaCRD on  main [⇡] via 🐹 v1.19 ✦ ➜  kubectl apply -f config/crd/bases/comp.genesis.xyz.com_personas.yaml
+customresourcedefinition.apiextensions.k8s.io/personas.comp.genesis.xyz.com created
+```
+- Write YAML for Persona Kind.
+```
+controlplane PersonaCRD on  main via 🐹 v1.19 ➜  cat > persona.yaml
+apiVersion: comp.genesis.xyz.com/v2
+kind: Persona
+metadata:
+ name: michael
+spec:
+ foo: "michael"
+^C
+```
+- Get the Persona Objects in advance.
+```
+controlplane PersonaCRD on  main [?] via 🐹 v1.19 ➜ kubectl get personas
+No resources found in default namespace.
+```
+- Apply the persona.yaml
+```
+controlplane PersonaCRD on  main [?] via 🐹 v1.19 ➜  kubectl apply -f persona.yaml
+persona.comp.genesis.xyz.com/michael created
+```
+- Get the Persona Objects
+```
+controlplane PersonaCRD on  main [?] via 🐹 v1.19 ➜  kubectl get personas
+NAME      AGE
+michael   5s
+```
+- Persona Controller is located in controllers folder.
+```
+controlplane PersonaCRD on  main [?] via 🐹 v1.19 ➜  ls controllers
+persona_controller.go  suite_test.go
+```
