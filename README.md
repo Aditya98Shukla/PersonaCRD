@@ -155,3 +155,17 @@ controlplane PersonaCRD on  main [!?] via 🐹 v1.19 ✦ ➜  kubebuilder ver
 Version: main.version{KubeBuilderVersion:"3.5.0", KubernetesVendor:"1.24.1", GitCommit:"26d12ab1134964dbbc3f68877ebe9cf6314e926a", BuildDate:"2022-06-24T12:17:52Z", GoOs:"linux", GoArch:"amd64"}
 ```
 - You will notice the changes after applying 'git status'. Move these changes to staging area using 'git add .' and then commit. Later Push the committed changes.
+
+## Creating CRD, Custom Resource and Custom Controller
+
+- In this step, create a new API for the custom resource. We'll create an API named Book in the comp group and version v2.
+```
+controlplane PersonaCRD on  main [!?] via 🐹 v1.19 ➜  kubebuilder create api --group comp --version v2 --kind Persona
+Create Resource [y/n]
+y
+Create Controller [y/n]
+y
+Writing kustomize manifests for you to edit...
+.......
+```
+- The Above command generates various files, including the CRD definition, controller, and API type definition.

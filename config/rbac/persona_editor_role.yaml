@@ -1,0 +1,24 @@
+# permissions for end users to edit personas.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: persona-editor-role
+rules:
+- apiGroups:
+  - comp.genesis.xyz.com
+  resources:
+  - personas
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - comp.genesis.xyz.com
+  resources:
+  - personas/status
+  verbs:
+  - get

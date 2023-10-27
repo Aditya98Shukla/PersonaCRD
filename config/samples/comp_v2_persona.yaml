@@ -1,0 +1,6 @@
+apiVersion: comp.genesis.xyz.com/v2
+kind: Persona
+metadata:
+  name: persona-sample
+spec:
+  # TODO(user): Add fields here
