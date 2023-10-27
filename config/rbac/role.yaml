@@ -1,0 +1,33 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: null
+  name: manager-role
+rules:
+- apiGroups:
+  - comp.genesis.xyz.com
+  resources:
+  - personas
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - comp.genesis.xyz.com
+  resources:
+  - personas/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - comp.genesis.xyz.com
+  resources:
+  - personas/status
+  verbs:
+  - get
+  - patch
+  - update

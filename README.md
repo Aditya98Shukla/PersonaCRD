@@ -169,3 +169,12 @@ Writing kustomize manifests for you to edit...
 .......
 ```
 - The Above command generates various files, including the CRD definition, controller, and API type definition.
+- Implement your new API and generate the manifests (e.g. CRDs,CRs) with:
+```
+controlplane PersonaCRD on  main [⇡] via 🐹 v1.19 ➜  make manifests
+```
+- You will notice that a CRD YAML is created at the location 'config/crd/bases' and its name is 'comp.genesis.xyz.com_personas.yaml'.
+```
+controlplane PersonaCRD on  main [?] via 🐹 v1.19 ➜  ls config/crd/bases
+comp.genesis.xyz.com_personas.yaml
+```
