@@ -1,0 +1,6 @@
+domain: genesis.xyz.com
+layout:
+- go.kubebuilder.io/v3
+projectName: personacrd
+repo: github.com/Aditya98Shukla/PersonaCRD
+version: "3"
