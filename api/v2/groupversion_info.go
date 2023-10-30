@@ -15,8 +15,8 @@ limitations under the License.
 */
 
 // Package v2 contains API Schema definitions for the comp v2 API group
-//+kubebuilder:object:generate=true
-//+groupName=comp.genesis.xyz.com
+// +kubebuilder:object:generate=true
+// +groupName=comp.genesis.xyz.com
 package v2
 
 import (
