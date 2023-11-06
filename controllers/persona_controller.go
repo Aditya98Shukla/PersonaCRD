@@ -96,7 +96,6 @@ func (r *PersonaReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ct
 				found = true
 				persona.Status.State = "Online"
 				persona.Status.Allowed = true
-				persona.Status.ExpireDate = time.Now().AddDate(0, 0, 30).String()
 				break
 			}
 		}
@@ -105,12 +104,16 @@ func (r *PersonaReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ct
 		if !found {
 			persona.Status.Allowed = false
 			persona.Status.State = "Offline"
-			persona.Status.ExpireDate = ""
 		}
 	}
-	
-	if shouldUpdate(personCopy, persona){
+
+	if shouldUpdate(personCopy, persona) {
 		Log.Info("Updating Persona Status")
+		if persona.Status.Allowed {
+			persona.Status.ExpireDate = time.Now().AddDate(0, 0, 30).String()
+		}else{
+			persona.Status.ExpireDate = ""
+		}
 		res, err := r.updateStatus(ctx, persona)
 		if err != nil {
 			return res, err
@@ -121,14 +124,12 @@ func (r *PersonaReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ct
 	return ctrl.Result{}, nil
 }
 
-func shouldUpdate(copy *compv2.Persona, orig *compv2.Persona)(isModified bool){
+func shouldUpdate(copy *compv2.Persona, orig *compv2.Persona) (isModified bool) {
 	isModified = false
 
 	if orig.Status.State != copy.Status.State {
 		isModified = true
-	}else if orig.Status.Allowed != copy.Status.Allowed {
-		isModified = true
-	}else if orig.Status.ExpireDate != copy.Status.ExpireDate {
+	} else if orig.Status.Allowed != copy.Status.Allowed {
 		isModified = true
 	}
 	return
